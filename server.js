@@ -8,7 +8,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const app = express();
-app.use(cors({origin : "https://frontend-babysteps.vercel.app/"}));
+app.use(cors({origin : "*"}));
 app.use(express.json());
 
 console.log(process.env.MONGODB_URL)
