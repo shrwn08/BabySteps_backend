@@ -12,6 +12,20 @@ exports.getDoctors = async (req, res) => {
   }
 };
 
+exports.createDoctor = async (req,res) => {
+    try {
+        const { name, specialization, workingHours } = req.body;
+        if (!name || !workingHours?.start || !workingHours?.end) {
+          return res.status(400).json({ error: "Missing required fields" });
+        }
+        
+        const newDoctor = new Doctor({ name, specialization, workingHours });
+        await newDoctor.save();
+        res.status(201).json(newDoctor);
+      } catch (error) {
+        res.status(500).json({ error: "Server error" });
+      }
+}
 
 exports.getDoctorSlots = async (req, res) => {
   try {

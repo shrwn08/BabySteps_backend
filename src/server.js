@@ -8,13 +8,17 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const app = express();
-app.use(cors());
+app.use(cors({origin : "https://frontend-babysteps.vercel.app/"}));
 app.use(express.json());
 
-console.log()
+console.log(process.env.MONGODB_URL)
+
 
 mongoose
-  .connect(`${process.env.MONGODB_URL}`)
+  .connect(`${process.env.MONGODB_URL}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
